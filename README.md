@@ -32,3 +32,10 @@ Two intervals that share only a boundary point (one ends exactly where the other
 - `intervalDuration(interval)` — milliseconds
 
 Zero runtime dependencies. ESM only. Tests run under `node --test`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
